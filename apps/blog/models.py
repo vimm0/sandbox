@@ -32,11 +32,15 @@ class Post(TimeStampObject, models.Model):
     slug = models.SlugField(max_length=128)
     content = models.TextField()
     publish_on = models.DateField()
-    list_display = ('title', 'category', 'tags', 'author', 'publish_on',)
 
-    # search_fields = ['title', 'byline', 'symbol']
-    # list_filter = ['publish_on', 'created_on']
-    # date_hierarchy = 'pub_date'
+    @property
+    def prop_title(self):
+        """
+        Usage: Post.objects.get(id=1).prop_title
+        :return:
+        """
+        title = getattr(self, "title", None)
+        return title if title else None
 
     def __str__(self):
         return self.title
