@@ -52,3 +52,23 @@ def is_model_registered(app_label, model_name):
         return False
     else:
         return True
+
+
+# ADDING SEARCH IN ADMIN DYNAMIC
+# def user_search_fields():
+#     User = get_user_model()
+#     fields = [
+#         "user__{0}".format(User.USERNAME_FIELD)
+#     ]
+#     if "email" in [f.name for f in User._meta.fields]:  # pragma: no branch
+#         fields += ["user__email"]
+#     return fields
+# USAGE:
+# def customer_search_fields():
+#     return [
+#         "customer__{0}".format(field)
+#         for field in user_search_fields()
+#     ]
+#  search_fields = [
+#         "FIELD_NAME",
+#     ] + user_search_fields()
