@@ -1,2 +1,3 @@
 django
 pinax-stripe
+django-hordak

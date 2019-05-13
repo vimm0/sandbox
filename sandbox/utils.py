@@ -53,7 +53,6 @@ def is_model_registered(app_label, model_name):
     else:
         return True
 
-
 # ADDING SEARCH IN ADMIN DYNAMIC
 # def user_search_fields():
 #     User = get_user_model()
@@ -72,3 +71,60 @@ def is_model_registered(app_label, model_name):
 #  search_fields = [
 #         "FIELD_NAME",
 #     ] + user_search_fields()
+
+# DJANGO ADMIN FILTER
+# class CustomerHasCardListFilter(admin.SimpleListFilter):
+#     title = "card presence"
+#     parameter_name = "has_card"
+#
+#     def lookups(self, request, model_admin):
+#         return [
+#             ["yes", "Has Card"],
+#             ["no", "Does Not Have a Card"]
+#         ]
+#
+#     def queryset(self, request, queryset):
+#         if self.value() == "yes":
+#             return queryset.filter(card__isnull=True)
+#         elif self.value() == "no":
+#             return queryset.filter(card__isnull=False)
+#         return queryset.all()
+# USAGE:
+#  list_filter = [CustomerHasCardListFilter]
+
+
+# Prefetching Change List
+# class PrefetchingChangeList(ChangeList):
+#     """A custom changelist to prefetch related fields."""
+#     def get_queryset(self, request):
+#         qs = super(PrefetchingChangeList, self).get_queryset(request)
+#
+#         if subscription_status in self.list_display:
+#             qs = qs.prefetch_related("subscription_set")
+#         if "customer" in self.list_display:
+#             qs = qs.prefetch_related("customer")
+#         if "user" in self.list_display:
+#             qs = qs.prefetch_related("user")
+#         return qs
+# USAGE:
+# class ModelAdmin(admin.ModelAdmin):
+#     def has_add_permission(self, request, obj=None):
+#         return False
+#
+#     def change_view(self, request, object_id, form_url="", extra_context=None):
+#         """Adjust change_view title ("View" instead of "Change")."""
+#         opts = self.model._meta
+#
+#         extra_context = extra_context or {}
+#         extra_context["title"] = _("View %s" % force_text(opts.verbose_name))
+#         return super(ModelAdmin, self).change_view(
+#             request, object_id, form_url, extra_context=extra_context,
+#         )
+#
+#     def has_change_permission(self, request, obj=None):
+#         if request.method == "POST":
+#             return False
+#         return True
+#
+#     def get_changelist(self, request, **kwargs):
+#         return PrefetchingChangeList
