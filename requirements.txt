@@ -1,3 +1,4 @@
 django
 pinax-stripe
 django-hordak
+django-nested-admin

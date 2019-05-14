@@ -128,3 +128,14 @@ def is_model_registered(app_label, model_name):
 #
 #     def get_changelist(self, request, **kwargs):
 #         return PrefetchingChangeList
+
+
+# from django.db import transaction
+# from django.db.models.signals import post_save
+# def on_transaction_commit(func):
+#     def inner(*args, **kwargs):
+#         transaction.on_commit(lambda: func(*args, **kwargs))
+# USAGE:
+#   @receiver(post_save, sender=A)
+#   @on_transaction_commit
+#   def trigger_on_post_save(sender, **kwargs):

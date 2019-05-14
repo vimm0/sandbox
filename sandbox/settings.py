@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'apps.comment',
     'mptt',
     'hordak',
+    'nested_admin',
+
 ]
 
 MIDDLEWARE = [

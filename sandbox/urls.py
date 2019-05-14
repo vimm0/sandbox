@@ -19,6 +19,7 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('payments/', include("pinax.stripe.urls")),
-    path('', include('hordak.urls', namespace='hordak'))
+    path('', include('hordak.urls', namespace='hordak')),
+    path('nested_admin/', include('nested_admin.urls')),
 
 ]
